@@ -45,6 +45,7 @@ body {
 .btn {
   font-family: Inter;
   color: #f5f7fb;
+  cursor: pointer;
   background-color: #4d5b9e;
   padding: 2rem 4rem;
   border: none;
