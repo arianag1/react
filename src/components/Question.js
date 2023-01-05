@@ -2,26 +2,38 @@ import React from "react";
 import { nanoid } from "nanoid";
 
 const Question = (props) => {
-  const chooseAnswer = (answer) => {
-    console.log(answer);
-  };
-
   //Create p JSX elements for each answer in the answers array,
   //if current answer option, is the current answer, set it's
   //className to question--correct-answer
-  const answerOptions = props.question.answers.map((answer) => (
-    <p
-      key={nanoid()}
-      className={`question--answer ${
-        props.question.chosenAnswer === answer && "question--chosen-answer"
-      }`}
-      onClick={() => {
-        props.chooseAnswerClickHandler(props.question.id, answer);
-      }}
-    >
-      {answer}
-    </p>
-  ));
+  const answerOptions = props.question.answers.map((answer) => {
+    let className = "question--answer";
+    const correctAnswer = props.question.correctAnswer;
+    const chosenAnswer = props.question.chosenAnswer;
+
+    if (props.checkAnswers) {
+      if (answer === chosenAnswer && answer === correctAnswer) {
+        className = `${className} question--chosen-answer-correct`;
+      } else if (answer === chosenAnswer && answer !== correctAnswer) {
+        className = `${className} question--chosen-answer-incorrect`;
+      } else if (answer !== chosenAnswer && answer === correctAnswer) {
+        className = `${className} question--chosen-answer-correct`;
+      }
+    } else if (answer === props.question.chosenAnswer) {
+      className = `${className} question--chosen-answer`;
+    }
+
+    return (
+      <p
+        key={nanoid()}
+        className={className}
+        onClick={() => {
+          props.chooseAnswerClickHandler(props.question.id, answer);
+        }}
+      >
+        {answer}
+      </p>
+    );
+  });
 
   return (
     <div className="question--container">
