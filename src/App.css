@@ -1,38 +1,118 @@
-.App {
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  color: #293264;
+  /* background-color: #e5e5e5; */
+  background-color: #f5f7fb;
+}
+
+.page--start {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 34rem auto;
+  gap: 2rem;
+}
+
+.page--start-title {
+  font-family: Karla;
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 37px;
+  letter-spacing: 0em;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.page--start-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn {
+  font-family: Inter;
+  color: #f5f7fb;
+  background-color: #4d5b9e;
+  padding: 2rem 4rem;
+  border: none;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* 
+  GAME PAGE styles
+*/
+.gamepage--container {
+  max-width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 4rem auto;
 }
 
-.App-link {
-  color: #61dafb;
+/* 
+  QUESTION styles
+*/
+
+.question--container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+  color: #293264;
+  border-bottom: 1px solid #dbdef0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.question--title {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 19px;
+  cursor: default;
+
+  color: #293264;
+}
+
+.question--answers-container {
+  display: flex;
+  gap: 3rem;
+}
+
+.question--answer {
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  border: 1px solid #293264;
+}
+
+.question--chosen-answer {
+  background-color: #d6dbf5;
+  border: none;
+}
+
+.question--btn {
+  align-self: flex-start;
+  margin: 3rem auto;
 }

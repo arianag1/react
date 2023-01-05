@@ -1,0 +1,14 @@
+Project Info
+
+Purpose: To create a Quzzical application. The application should pull questions from a question API 
+(https://opentdb.com/api_config.php), and then show the questions on the screen per the figma design 
+(https://www.figma.com/file/gYMvRiGFeH16tsCaygjSrR/Quizzical-App-(Copy)?node-id=0%3A1&t=ThehngkUBd78aWRF-0). 
+The inital Quizzical application should show the title, subtitle and then a "Start quiz" button. When the 
+button is clicked, the screen should change to show a display of all of the questions 
+(refer to the Figma design for more details). When the use starts the quiz they should be able to click on 
+the answer they think is correct for each question, when they are finished choosing their answers ("check answers" is clicked), 
+the use should be able to see whether the answers that they chose are correct or incorrect. Use React hooks such as useEffect 
+and useState to accomplish the goals of this applications.  
+
+Additional Important Links:
+- When fetching the data, use url: https://opentdb.com/api.php?amount=5&type=multiple 

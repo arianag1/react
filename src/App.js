@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-function App() {
+import "./app.css";
+import StartPage from "./components/pages/StartPage";
+import GamePage from "./components/pages/GamePage";
+import data from "./data";
+
+const App = (props) => {
+  const [playingGame, setPlayingGame] = useState(false);
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    setQuestions(data.results);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {playingGame ? (
+        <GamePage game={{ questions }} />
+      ) : (
+        <StartPage game={{ setPlayingGame }} />
+      )}
+    </>
   );
-}
+};
 
 export default App;
