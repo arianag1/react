@@ -52,10 +52,11 @@ const GamePage = (props) => {
     return display;
   };
 
+  //Only display results from checkAnswersDisplay, if the list of questions is greater than 0
   return (
     <div className="gamepage--container">
       {listOfQuestions}
-      {checkAnswersDisplay()}
+      {props.game.questions.length && checkAnswersDisplay()}
     </div>
   );
 };

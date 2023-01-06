@@ -8,41 +8,42 @@ import GamePage from "./components/pages/GamePage";
 const App = (props) => {
   const [startGame, setStartGame] = useState(false);
   const [playingGame, setPlayingGame] = useState(false);
-  //State to handle when game is loading
-  // const [loadingNewGame, setLoadingNewGame] = useState(false);
   const [questions, setQuestions] = useState([]);
   const [checkAnswers, setCheckAnswers] = useState(false);
 
   useEffect(() => {
     if (playingGame) {
-      fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+      fetch("https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986")
         .then((res) => res.json())
         .then((data) => {
           const allQuestions = data.results.map((question) => ({
             id: nanoid(),
-            question: question.question,
+            question: decodeURIComponent(question.question),
             correctAnswer: question.correct_answer,
             answers: retrieveQuestionAnswers(question),
             chosenAnswer: "",
           }));
           setQuestions(allQuestions);
-          //Set timeout for game. Add loading to screen to inform user
-          //game is loading
-          // setTimeout(() => setQuestions(allQuestions), 2000);
         });
     }
   }, [playingGame]);
 
   const retrieveQuestionAnswers = (question) => {
     //Retrieve all of the incorrect answers and store them in an array
-    const answers = [...question.incorrect_answers];
+    const answers = question.incorrect_answers.map((answer) =>
+      decodeURIComponent(answer)
+    );
 
     //Once that's done use math.random to pick a random position in the array
     //and add the correct answer to that position in the array
     const postionInArray = Math.floor(Math.random() * answers.length);
-    answers.splice(postionInArray, 0, question.correct_answer);
+    answers.splice(
+      postionInArray,
+      0,
+      decodeURIComponent(question.correct_answer)
+    );
 
-    //return new array
+    //return new array of answers that contain both incorrect answers and the correct answer
     return answers;
   };
 
