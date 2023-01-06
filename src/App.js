@@ -19,7 +19,7 @@ const App = (props) => {
           const allQuestions = data.results.map((question) => ({
             id: nanoid(),
             question: decodeURIComponent(question.question),
-            correctAnswer: question.correct_answer,
+            correctAnswer: decodeURIComponent(question.correct_answer),
             answers: retrieveQuestionAnswers(question),
             chosenAnswer: "",
           }));
@@ -29,13 +29,13 @@ const App = (props) => {
   }, [playingGame]);
 
   const retrieveQuestionAnswers = (question) => {
-    //Retrieve all of the incorrect answers and store them in an array
+    //Retrieve all of the incorrect answers, decode them and store them in the answers array
     const answers = question.incorrect_answers.map((answer) =>
       decodeURIComponent(answer)
     );
 
-    //Once that's done use math.random to pick a random position in the array
-    //and add the correct answer to that position in the array
+    //Once that's done use math.random to pick a random position in the array.
+    //Decode the correct answer string and then add it to a random position in the array.
     const postionInArray = Math.floor(Math.random() * answers.length);
     answers.splice(
       postionInArray,
