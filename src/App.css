@@ -124,10 +124,8 @@ body {
 }
 
 .question--chosen-answer-incorrect {
-  /* background-color: rgb(248, 188, 188);
-  border: 1px solid #f8bcbc; */
-  background-color: #fce4e4;
-  border: 1px solid #fce4e4;
+  background-color: rgb(248, 188, 188);
+  border: 1px solid #f8bcbc;
 }
 
 .question--btn,

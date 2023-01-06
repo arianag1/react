@@ -30,18 +30,19 @@ const App = (props) => {
 
   const retrieveQuestionAnswers = (question) => {
     //Retrieve all of the incorrect answers, decode them and store them in the answers array
-    const answers = question.incorrect_answers.map((answer) =>
-      decodeURIComponent(answer)
-    );
+    const answers = question.incorrect_answers.map((answer) => ({
+      id: nanoid(),
+      value: decodeURIComponent(answer),
+    }));
 
-    //Once that's done use math.random to pick a random position in the array.
-    //Decode the correct answer string and then add it to a random position in the array.
+    //after answers have been added to answer array, pick a random position in the array.
+    //Decode the correct answer string and then add it to the chosen random position in
+    //the array.
     const postionInArray = Math.floor(Math.random() * answers.length);
-    answers.splice(
-      postionInArray,
-      0,
-      decodeURIComponent(question.correct_answer)
-    );
+    answers.splice(postionInArray, 0, {
+      id: nanoid(),
+      value: decodeURIComponent(question.correct_answer),
+    });
 
     //return new array of answers that contain both incorrect answers and the correct answer
     return answers;
@@ -50,15 +51,18 @@ const App = (props) => {
   //Funcion will be passed down in props to Question component.
   //Function takes the id of the question that an answer is chosen for,
   //and the chosen answer as an argument to update a question's
-  //chosenAnswer property, in the questions array
+  //chosenAnswer property, in the questions array, but only while game is being
+  //played (i.e "checkAnswers" is set to false)
   const chooseAnswer = (questionId, chosenAnswer) => {
-    setQuestions((prevQuestions) => {
-      return prevQuestions.map((question) =>
-        question.id === questionId
-          ? { ...question, chosenAnswer: chosenAnswer }
-          : question
-      );
-    });
+    if (!checkAnswers) {
+      setQuestions((prevQuestions) => {
+        return prevQuestions.map((question) =>
+          question.id === questionId
+            ? { ...question, chosenAnswer: chosenAnswer }
+            : question
+        );
+      });
+    }
   };
 
   return (

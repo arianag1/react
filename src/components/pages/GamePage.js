@@ -2,16 +2,6 @@ import React from "react";
 import Question from "../Question";
 
 const GamePage = (props) => {
-  //Convert question objects into JSX
-  const listOfQuestions = props.game.questions.map((question) => (
-    <Question
-      key={question.id}
-      question={question}
-      chooseAnswerClickHandler={props.game.chooseAnswer}
-      checkAnswers={props.game.checkAnswers}
-    />
-  ));
-
   const checkAnswersClickHandler = () => {
     props.game.setCheckAnswers(true);
     props.game.setPlayingGame(false);
@@ -51,6 +41,16 @@ const GamePage = (props) => {
     );
     return display;
   };
+
+  //Convert question objects into JSX
+  const listOfQuestions = props.game.questions.map((question) => (
+    <Question
+      key={question.id}
+      question={question}
+      chooseAnswer={props.game.chooseAnswer}
+      checkingAnswers={props.game.checkAnswers}
+    />
+  ));
 
   //Only display results from checkAnswersDisplay, if the list of questions is greater than 0
   return (
